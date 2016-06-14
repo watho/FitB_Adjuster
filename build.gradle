@@ -21,6 +21,10 @@ repositories {
 dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'org.slf4j:jul-to-slf4j:1.7.21'
+    //compile 'org.slf4j:slf4j-jdk14:1.7.21'
+    
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
     compile 'com.google.oauth-client:google-oauth-client:1.20.0'
     compile 'com.google.oauth-client:google-oauth-client-java6:1.20.0'
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.20.0'
@@ -31,4 +35,8 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
+    // http://mvnrepository.com/artifact/org.hamcrest/hamcrest-all
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+
+    
 }
