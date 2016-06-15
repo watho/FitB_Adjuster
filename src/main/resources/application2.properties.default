@@ -1,0 +1,5 @@
+# Rename to application.properties and enter your credentials
+apiKey: ENTER_API_KEY
+apiSecret: ENTER_API_SECRET
+# domain: 
+# port:
