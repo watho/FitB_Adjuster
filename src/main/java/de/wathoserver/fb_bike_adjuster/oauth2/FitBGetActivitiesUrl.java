@@ -3,7 +3,7 @@ package de.wathoserver.fb_bike_adjuster.oauth2;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.util.Key;
 
-public class FitBUrl extends GenericUrl {
+public class FitBGetActivitiesUrl extends GenericUrl {
 
   @Key
   private String afterDate;
@@ -17,7 +17,7 @@ public class FitBUrl extends GenericUrl {
   @Key
   private String sort = "asc";
 
-  public FitBUrl() {
+  public FitBGetActivitiesUrl() {
     super("https://api.fitbit.com/1/user/-/activities/list.json");
   }
 

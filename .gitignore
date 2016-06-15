@@ -16,3 +16,6 @@ hs_err_pid*
 /bin
 /.settings
 OAuth2ClientCredentials.java
+/cache/
+application.properties
+
