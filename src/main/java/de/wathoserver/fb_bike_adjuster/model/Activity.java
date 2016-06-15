@@ -9,7 +9,13 @@ public class Activity extends GenericJson {
   private String activityName;
 
   @Key
+  private long activityTypeId;
+
+  @Key
   private long activeDuration;
+
+  @Key
+  private long calories;
 
   public String getActivityName() {
     return activityName;
@@ -25,5 +31,21 @@ public class Activity extends GenericJson {
 
   public void setActiveDuration(long activeDuration) {
     this.activeDuration = activeDuration;
+  }
+
+  public long getActivityTypeId() {
+    return activityTypeId;
+  }
+
+  public void setActivityTypeId(long activityTypeId) {
+    this.activityTypeId = activityTypeId;
+  }
+
+  public long getCalories() {
+    return calories;
+  }
+
+  public void setCalories(long calories) {
+    this.calories = calories;
   }
 }

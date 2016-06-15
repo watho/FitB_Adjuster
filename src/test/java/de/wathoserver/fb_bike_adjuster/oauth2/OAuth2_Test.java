@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import com.google.api.client.http.HttpTransport;
 import de.wathoserver.fb_bike_adjuster.Application;
 import de.wathoserver.fb_bike_adjuster.model.Activities;
 import de.wathoserver.fb_bike_adjuster.model.Activity;
+import de.wathoserver.fb_bike_adjuster.model.Calories;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
@@ -51,6 +53,13 @@ public class OAuth2_Test {
       log.debug("activity found = {}. Duration={},all={}", activity.getActivityName(),
           activity.getActiveDuration(), activity);
     }
+  }
+
+  @Test
+  public void testGetCalories() throws Exception {
+    FitBGetCaloriesUrl caloriesUrl = new FitBGetCaloriesUrl();
+    Calories cals = fitBApi.executeRequest(caloriesUrl, Calories.class);
+    log.debug("cals: {}", cals);
   }
 
 
