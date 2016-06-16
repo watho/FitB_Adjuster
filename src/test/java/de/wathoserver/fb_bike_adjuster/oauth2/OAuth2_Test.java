@@ -4,34 +4,25 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.api.client.http.HttpTransport;
 
-import de.wathoserver.fb_bike_adjuster.Application;
+import de.wathoserver.fb_bike_adjuster.api.BaseFitBTest;
+import de.wathoserver.fb_bike_adjuster.api.GetActivitiesAfterUrl;
 import de.wathoserver.fb_bike_adjuster.model.Activities;
 import de.wathoserver.fb_bike_adjuster.model.Activity;
-import de.wathoserver.fb_bike_adjuster.model.Calories;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
-public class OAuth2_Test {
+
+public class OAuth2_Test extends BaseFitBTest {
 
   private static final org.slf4j.Logger log = LoggerFactory.getLogger(OAuth2_Test.class);
-
-  @Autowired
-  private FitBApi fitBApi;
 
   @Test
   public void testOAuth2() throws Exception {
@@ -39,12 +30,13 @@ public class OAuth2_Test {
     SLF4JBridgeHandler.removeHandlersForRootLogger();
     SLF4JBridgeHandler.install();
 
-    fitBApi.logSettings();
+    getFitBApi().logSettings();
 
-    FitBGetActivitiesUrl getActivitiesAfterDate = new FitBGetActivitiesUrl();
-    getActivitiesAfterDate.setAfterDate("2016-06-13");
+    GetActivitiesAfterUrl getActivitiesAfterDate = new GetActivitiesAfterUrl("2016-06-13");
+    // getActivitiesAfterDate.setAfterDate("2016-06-13");
 
-    Activities activities = fitBApi.executeRequest(getActivitiesAfterDate, Activities.class);
+    Activities activities =
+        getFitBApi().executeGetRequest(getActivitiesAfterDate, Activities.class);
 
     assertThat(activities, is(notNullValue()));
     assertThat(activities.getActivities(), is(notNullValue()));
@@ -54,13 +46,4 @@ public class OAuth2_Test {
           activity.getActiveDuration(), activity);
     }
   }
-
-  @Test
-  public void testGetCalories() throws Exception {
-    FitBGetCaloriesUrl caloriesUrl = new FitBGetCaloriesUrl();
-    Calories cals = fitBApi.executeRequest(caloriesUrl, Calories.class);
-    log.debug("cals: {}", cals);
-  }
-
-
 }

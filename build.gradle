@@ -1,55 +1,67 @@
 buildscript {
   repositories {
-    jcenter()
-    //maven { url "http://repo.spring.io/snapshot" }
-    //maven { url "http://repo.spring.io/milestone" }
-}
-  dependencies {
-      classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE")
+    jcenter()   
   }
+  dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE") }
 }
 
 // Apply the java plugin to add support for Java
 
 apply plugin: 'spring-boot'
 apply plugin: 'java'
- 
+apply plugin: 'application'
+
 jar {
-   baseName = 'FBAdjuster'
-   version =  '0.0.1-SNAPSHOT'
+  baseName = 'FBAdjuster'
+  version =  '0.0.1-SNAPSHOT'
 }
+
+
+//mainClassName = "org.springframework.shell.Bootstrap"
+mainClassName = "de.wathoserver.fb_bike_adjuster.Application"
 
 // In this section you declare where to find the dependencies of your project
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+  // Use 'jcenter' for resolving your dependencies.
+  // You can declare any Maven/Ivy/file repository here.
+  jcenter()
+  maven { url 'https://repo.spring.io/libs-milestone' }
 }
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter:1.3.5.RELEASE')
-    // Validation with JSR-303 and hibernate validator.
-    compile('org.springframework.boot:spring-boot-starter-validation')
-  
-    // The production code uses the SLF4J logging API at compile time
-    //compile 'org.slf4j:slf4j-api'
-    // compile 'org.slf4j:jul-to-slf4j'    
-    
-    //compile 'ch.qos.logback:logback-classic'
-    compile 'com.google.oauth-client:google-oauth-client:1.20.0'
-    compile 'com.google.oauth-client:google-oauth-client-java6:1.20.0'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.20.0'
-    compile 'com.google.http-client:google-http-client-jackson2:1.20.0'
+  compile('org.springframework.boot:spring-boot-starter:1.3.5.RELEASE')
+  // Validation with JSR-303 and hibernate validator.
+  compile('org.springframework.boot:spring-boot-starter-validation')
+  compile('joda-time:joda-time')
+  //compile('org.mvnsearch.spring.boot:spring-boot-starter-shell:1.0.0-SNAPSHOT')
+  // The production code uses the SLF4J logging API at compile time
+  //compile 'org.slf4j:slf4j-api'
+  // compile 'org.slf4j:jul-to-slf4j'
 
-    // Declare the dependency for your favourite test framework you want to use in your tests.
-    // TestNG is also supported by the Gradle Test task. Just change the
-    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
-    // 'test.useTestNG()' to your build script.
-    //testCompile 'junit:junit:4.12'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    // http://mvnrepository.com/artifact/org.hamcrest/hamcrest-all
-    //testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+  compile 'org.springframework.shell:spring-shell:1.2.0.M1'
+  compile 'com.google.oauth-client:google-oauth-client:1.20.0'
+  compile 'com.google.oauth-client:google-oauth-client-java6:1.20.0'
+  compile 'com.google.oauth-client:google-oauth-client-jetty:1.20.0'
+  compile 'com.google.http-client:google-http-client-jackson2:1.20.0'
 
-    compile("org.springframework.boot:spring-boot-devtools")
+  // Declare the dependency for your favourite test framework you want to use in your tests.
+  // TestNG is also supported by the Gradle Test task. Just change the
+  // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+  // 'test.useTestNG()' to your build script.
+  //testCompile 'junit:junit:4.12'
+  testCompile 'org.springframework.boot:spring-boot-starter-test'
+  // http://mvnrepository.com/artifact/org.hamcrest/hamcrest-all
+  //testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+
+  compile("org.springframework.boot:spring-boot-devtools")
+}
+
+run {
+  standardInput = System.in
+}
+
+task wrapper(type: Wrapper) {
+  description = 'Generates gradlew[.bat] scripts'
+  gradleVersion = '2.13'
 }

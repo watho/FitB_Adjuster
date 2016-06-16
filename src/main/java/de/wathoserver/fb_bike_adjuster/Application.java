@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-import de.wathoserver.fb_bike_adjuster.oauth2.FitBApi;
+import de.wathoserver.fb_bike_adjuster.api.FitBApi;
+import de.wathoserver.fb_bike_adjuster.cli.SpringShellApplication;
 
 @SpringBootApplication
 @EnableConfigurationProperties()
@@ -21,7 +21,8 @@ public class Application implements ApplicationRunner {
   private FitBApi fitBApi;
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    // SpringApplication.run(Application.class, args);
+    SpringShellApplication.run(Application.class, args);
   }
 
   @Override
